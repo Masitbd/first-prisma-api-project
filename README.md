@@ -16,3 +16,6 @@ http://localhost:5000/api/v1/post?sortBy=title&sortOrder=desc
 
 6. **Search using searchTerm**
 http://localhost:5000/api/v1/post?sortBy=title&sortOrder=desc&searchTerm=murad
+
+7. **Impliment pagination**
+http://localhost:5000/api/v1/post?page=2&limit=10

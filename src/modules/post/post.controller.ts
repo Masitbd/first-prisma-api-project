@@ -31,7 +31,7 @@ const getPosts = async (req: Request, res: Response) => {
   // req.query   we get sortby and sortorder that means we get query string for req.query
 
   const options = req.query;
-  //console.log(options);
+  console.log(options);
   try {
     const result = await PostService.getPosts(options);
     res.send({

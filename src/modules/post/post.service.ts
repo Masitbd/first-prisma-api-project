@@ -40,8 +40,13 @@ const insertIntoDb = async (data: Post): Promise<Post> => {
  */
 
 const getPosts = async (options: any) => {
-  const { sortBy, sortOrder, searchTerm } = options;
+  const { sortBy, sortOrder, searchTerm, page, limit } = options;
+
+  const skip = parseInt(limit) * parseInt(page) - parseInt(limit);
+  const take = parseInt(limit);
   const result = await prisma.post.findMany({
+    skip,
+    take,
     include: {
       category: true, // this category and author is the table relationship name
       author: true,
@@ -97,3 +102,16 @@ export const PostService = {
   getPosts,
   getSinglePost,
 };
+
+/*
+ limit = 5
+ page number = 2
+ total = 10
+
+ take = limit = 5
+ skip = limit*page -limit
+      = 5*2 -5 = 5 
+      means skip first 5 and then take next 5
+
+ 1 2 3 4 5 6 7 8 9 10
+*/

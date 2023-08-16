@@ -28,8 +28,12 @@ const insertIntoDb = async (req: Request, res: Response) => {
 // };
 
 const getPosts = async (req: Request, res: Response) => {
+  // req.query   we get sortby and sortorder that means we get query string for req.query
+
+  const options = req.query;
+  //console.log(options);
   try {
-    const result = await PostService.getPosts();
+    const result = await PostService.getPosts(options);
     res.send({
       success: true,
       message: " Post fatched successfully",
@@ -43,7 +47,6 @@ const getPosts = async (req: Request, res: Response) => {
 const getSinglePost = async (req: Request, res: Response) => {
   try {
     const id = parseInt(req.params.id);
-
     const result = await PostService.getSinglePost(id);
     console.log("log my id", result);
     res.send({

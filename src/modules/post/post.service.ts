@@ -39,11 +39,40 @@ const insertIntoDb = async (data: Post): Promise<Post> => {
 };
  */
 
-const getPosts = async () => {
+const getPosts = async (options: any) => {
+  const { sortBy, sortOrder, searchTerm } = options;
   const result = await prisma.post.findMany({
     include: {
       category: true, // this category and author is the table relationship name
       author: true,
+    },
+    orderBy:
+      sortBy && sortOrder
+        ? {
+            //createAt: "desc",
+            [sortBy]: sortOrder,
+          }
+        : {
+            createAt: "desc",
+          },
+
+    where: {
+      OR: [
+        {
+          title: {
+            contains: searchTerm,
+            mode: "insensitive",
+          },
+        },
+        {
+          author: {
+            name: {
+              contains: searchTerm,
+              mode: "insensitive",
+            },
+          },
+        },
+      ],
     },
   });
   return result;

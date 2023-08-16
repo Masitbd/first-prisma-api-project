@@ -14,18 +14,34 @@ const insertIntoDb = async (req: Request, res: Response) => {
   }
 };
 
-// const insertOrUpdateProfile = async (req: Request, res: Response) => {
-//   try {
-//     const result = await UserService.insertOrUpdateProfile(req.body);
-//     res.send({
-//       success: true,
-//       message: "Profile created/updated successfully",
-//       data: result,
-//     });
-//   } catch (error) {
-//     res.send(error);
-//   }
-// };
+const UpdatePost = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+  const data = req.body;
+  try {
+    const result = await PostService.updatePost(id, data);
+    res.send({
+      success: true,
+      message: "Post updated successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.send(error);
+  }
+};
+const DeletePost = async (req: Request, res: Response) => {
+  const id = parseInt(req.params.id);
+
+  try {
+    const result = await PostService.deletePost(id);
+    res.send({
+      success: true,
+      message: "One post deleted successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.send(error);
+  }
+};
 
 const getPosts = async (req: Request, res: Response) => {
   // req.query   we get sortby and sortorder that means we get query string for req.query
@@ -37,7 +53,8 @@ const getPosts = async (req: Request, res: Response) => {
     res.send({
       success: true,
       message: " Post fatched successfully",
-      data: result,
+      total: result.total,
+      data: result.data,
     });
   } catch (error) {
     res.send(error);
@@ -59,4 +76,10 @@ const getSinglePost = async (req: Request, res: Response) => {
   }
 };
 
-export const PostController = { insertIntoDb, getPosts, getSinglePost };
+export const PostController = {
+  insertIntoDb,
+  getPosts,
+  getSinglePost,
+  UpdatePost,
+  DeletePost,
+};

@@ -19,3 +19,6 @@ http://localhost:5000/api/v1/post?sortBy=title&sortOrder=desc&searchTerm=murad
 
 7. **Impliment pagination**
 http://localhost:5000/api/v1/post?page=2&limit=10
+
+8. **Delete single post**
+http://localhost:5000/api/v1/post/1

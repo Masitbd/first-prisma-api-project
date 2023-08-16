@@ -8,6 +8,8 @@ const router = express.Router();
 }); */
 
 router.post("/create-post", PostController.insertIntoDb);
+router.patch("/:id", PostController.UpdatePost);
+router.delete("/:id", PostController.DeletePost);
 router.get("/:id", PostController.getSinglePost);
 router.get("/", PostController.getPosts);
 // router.post("/profile", UserController.insertOrUpdateProfile);

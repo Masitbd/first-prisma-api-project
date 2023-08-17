@@ -8,6 +8,7 @@ const router = express.Router();
 }); */
 
 router.post("/create-post", PostController.insertIntoDb);
+router.get("/learn-query", PostController.LearnAgreegateAndGropping);
 router.patch("/:id", PostController.UpdatePost);
 router.delete("/:id", PostController.DeletePost);
 router.get("/:id", PostController.getSinglePost);

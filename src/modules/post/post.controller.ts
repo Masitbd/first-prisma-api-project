@@ -76,10 +76,24 @@ const getSinglePost = async (req: Request, res: Response) => {
   }
 };
 
+const LearnAgreegateAndGropping = async (req: Request, res: Response) => {
+  try {
+    const result = await PostService.learnAgreegateAndGropping();
+    res.send({
+      success: true,
+      message: "Get result",
+      data: result,
+    });
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 export const PostController = {
   insertIntoDb,
   getPosts,
   getSinglePost,
   UpdatePost,
   DeletePost,
+  LearnAgreegateAndGropping,
 };
